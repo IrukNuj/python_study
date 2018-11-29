@@ -17,34 +17,34 @@ def get_dept_and_lab(url):
     time.sleep(0.5)
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'lxml')
-    dept = soup.select_one('.laboName .title')
-    print('dept', dept)
-    lab = soup.select_one('.laboName .title')
+    dept = soup.select_one('.subjectName p').text
+    lab = soup.select_one('.laboName .title').text
     return dept, lab
 
 
 render_dict = {}
 render_list = []
+keywords_list = []
 
 r = requests.get('https://kitnet.jp/laboratories/index.html')
 soup = BeautifulSoup(r.content, 'lxml')
 
-links = soup.select('.sectionContent a')
+links = soup.find_all(class_='subjectItem')
+
+for l in links:
+    print(l)
+
 render_dict['labs'] = []
 
 for l in links:
     if l.get('href'):
-        print(l)
         target_url = 'https://kitnet.jp/laboratories/' + l.get('href')
-        print(target_url)
         keywords = get_keywords(target_url)
         dept, lab = get_dept_and_lab(target_url)
-        print(dept)
-        print(lab)
-        print(keywords)
         render_dict['dept'] = dept
         keywords_dict = {'keywords': keywords}
-        render_dict['labs'] = render_dict['labs'].append(keywords_dict)
+        # keywords_list = keywords_list.append(keywords_dict)
+
         print('render-dict', render_dict)
         print('keywords-dict', keywords_dict)
         print()
