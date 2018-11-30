@@ -10,7 +10,7 @@ json_body = []
 href_dict, labs_list = get_links(INDEX_URL)
 
 keywords_dict = {}
-for dept, labs_url in zip(href_dict.keys(), href_dict.values()):
+for dept, labs_url, labs_list in zip(href_dict.keys(), href_dict.values(), labs_list):
     labs_dict = {}
     labs_value_list = []
     for lab_url, lab in zip(labs_url, labs_list):
@@ -26,4 +26,5 @@ for dept, labs_url in zip(href_dict.keys(), href_dict.values()):
 
 filename = 'labs.json'
 with open(filename, mode='w', encoding='utf-8') as f:
-    json.dump(json_body, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ':　'))
+    # json.dump(json_body, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ':　'))
+    json.dump(json_body, f, ensure_ascii=False)
