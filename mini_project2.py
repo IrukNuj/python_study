@@ -47,14 +47,15 @@ for l in links:
 keywords_dict = {}
 for dept, labs_url in zip(href_dict.keys(), href_dict.values()):
     labs_dict = {}
-    keywords_list = []
+    labs_value_list = []
     for lab_url, lab in zip(labs_url, labs_list):
+        labs_value_dict = {}
         url = url_base + lab_url
-        keywords_dict['keywords'] = get_keywords(url)
-        print(keywords_dict)
-        keywords_list.append(keywords_dict)
+        labs_value_dict['keywords'] = get_keywords(url)
+        labs_value_dict['lab'] = lab
+        labs_value_list.append(labs_value_dict)
     labs_dict['dept'] = lab
-    labs_dict['labs'] = keywords_list
+    labs_dict['labs'] = labs_value_list
     print(labs_dict)
 
 
