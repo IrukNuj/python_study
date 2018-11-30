@@ -1,3 +1,7 @@
+import requests
+import time
+from bs4 import BeautifulSoup
+
 def get_keywords(url):
     time.sleep(0.1)
     print(url)

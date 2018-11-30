@@ -1,12 +1,10 @@
-import get_keywords
-import get_links
+from get_keywords import get_keywords
+from get_links import get_links
 
 URL_BASE = 'https://kitnet.jp/laboratories/'
 INDEX_URL = 'https://kitnet.jp/laboratories/index.html'
 render_dict = {}
 json_body = []
-
-
 
 href_dict, labs_list = get_links(INDEX_URL)
 
