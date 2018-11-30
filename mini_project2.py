@@ -26,7 +26,7 @@ def get_dept_and_lab(url):
 render_dict = {}
 render_list = []
 keywords_list = []
-dict_hoge = {}
+
 url_base = 'https://kitnet.jp/laboratories/'
 
 r = requests.get('https://kitnet.jp/laboratories/index.html')
@@ -35,26 +35,25 @@ soup = BeautifulSoup(r.content, 'lxml')
 links = soup.find_all(class_='subjectItem')
 
 
-
+href_dict = {}
 for l in links:
     keywords_list = []
     labs_list = []
     [keywords_list.append(lhref.get('href')) for lhref in l.select('.laboList a')]
     [labs_list.append(lhref.text) for lhref in l.select('.laboList a')]
-    dict_hoge[l.p.text] = keywords_list
-    print(dict_hoge)
+    href_dict[l.p.text] = keywords_list
+
 
 keywords_dict = {}
-for hoge, huga in zip(dict_hoge.values(), dict_hoge.keys()):
+for dept, labs_url in zip(href_dict.keys(), href_dict.values()):
     labs_dict = {}
     keywords_list = []
-    for i, hanya in zip(hoge, labs_list):
-        print('idayo-----', i)
-        url = url_base + i
+    for lab_url, lab in zip(labs_url, labs_list):
+        url = url_base + lab_url
         keywords_dict['keywords'] = get_keywords(url)
         print(keywords_dict)
         keywords_list.append(keywords_dict)
-    labs_dict['dept'] = huga
+    labs_dict['dept'] = lab
     labs_dict['labs'] = keywords_list
     print(labs_dict)
 
