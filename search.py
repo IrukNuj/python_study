@@ -1,16 +1,17 @@
 import json
 
-filename = 'labs.json'
-test_params = 'データマイニング'
 
-with open(filename, mode='r', encoding='utf-8') as f:
-    data = json.load(f)
+def search_labs(params):
+    filename = 'labs.json'
 
-result_list = []
+    with open(filename, mode='r', encoding='utf-8') as f:
+        data = json.load(f)
 
-for d in data:
-    for dict in d['labs']:
-        if test_params in dict['keywords']:
-            result_list.append(tuple([d['dept'], dict['lab']]))
+    result_list = []
 
-print(result_list)
+    for d in data:
+        for dict in d['labs']:
+            if params in dict['keywords']:
+                result_list.append(tuple([d['dept'], dict['lab']]))
+
+    return result_list
