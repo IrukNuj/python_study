@@ -61,7 +61,6 @@ for dept, labs_url in zip(href_dict.keys(), href_dict.values()):
 
 
 
-
 render_dict['labs'] = []
 
 for l in links:
