@@ -63,7 +63,3 @@ def search_labs(params):
         for dict in d['labs']:
             if params in dict['keywords']:
                 result_list.append(tuple([d['dept'], dict['lab']]))
-
-
-
-
