@@ -6,12 +6,14 @@ from bs4 import BeautifulSoup
 URL_BASE = 'https://kitnet.jp/laboratories/'
 INDEX_URL = 'https://kitnet.jp/laboratories/index.html'
 
+
 def get_keywords(url):
     time.sleep(0.5)
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'lxml')
     keywords_csv = soup.find('meta', attrs={'name': 'keywords'}).get('content')
     return keywords_csv.split(',')
+
 
 def get_links(url):
     href_dict = {}
@@ -28,6 +30,7 @@ def get_links(url):
         href_dict[l.p.text] = keywords_list
         labs_list.append(lab_list)
     return href_dict, labs_list
+
 
 def scrape_labs():
     json_body = []
@@ -50,6 +53,7 @@ def scrape_labs():
         with open(filename, mode='w', encoding='utf-8') as f:
             # json.dump(json_body, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ':　'))
             json.dump(json_body, f, ensure_ascii=False)
+
 
 def search_labs(params):
     filename = 'labs.json'
