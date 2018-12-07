@@ -27,7 +27,7 @@ def get_links(url):
         lab_list = []
         [keywords_list.append(lhref.get('href')) for lhref in l.select('.laboList a')]
         [lab_list.append(lhref.text) for lhref in l.select('.laboList a')]
-        href_dict[l.p.text] = keywords_list
+        href_dict[l.p.text] = keywords_d list
         labs_list.append(lab_list)
     return href_dict, labs_list
 
@@ -51,7 +51,6 @@ def scrape_labs():
         json_body.append(labs_dict)
         filename = 'labs.json'
         with open(filename, mode='w', encoding='utf-8') as f:
-            # json.dump(json_body, f, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ':　'))
             json.dump(json_body, f, ensure_ascii=False)
 
 
@@ -67,3 +66,7 @@ def search_labs(params):
         for dict in d['labs']:
             if params in dict['keywords']:
                 result_list.append(tuple([d['dept'], dict['lab']]))
+    return result_list
+
+
+print(search_labs('画像認識'))
