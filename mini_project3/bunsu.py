@@ -51,7 +51,9 @@ def div(div1, div2):
     mixed_fraction_1 = (Fraction(div1[2], div1[3]) + div1[1]) * div1[0]
     mixed_fraction_2 = (Fraction(div2[2], div2[3]) + div2[1]) * div2[0]
 
-    added_fraction = mixed_fraction_1 * mixed_fraction_2
+    added_fraction = mixed_fraction_1 / mixed_fraction_2
+
+    added_fraction, plus_minus_sign = decision_posi_nega(added_fraction)
 
     coefficient_num = added_fraction.numerator // added_fraction.denominator
 
@@ -70,7 +72,7 @@ def decision_posi_nega(added_fraction):
     return added_fraction, plus_minus_sign
 
 def gcd(num1, num2):
-
+    return  math.gcd(num1, num2)
 
 
 add((1, 1, 1, 2), (1, 2, 2, 3))
