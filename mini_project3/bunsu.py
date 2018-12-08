@@ -73,7 +73,3 @@ def decision_posi_nega(added_fraction):
 
 def gcd(num1, num2):
     return  math.gcd(num1, num2)
-
-
-add((1, 1, 1, 2), (1, 2, 2, 3))
-add((-1, 1, 1, 2), (-1, 2, 2, 3)) #(-1, 4, 1, 6)
