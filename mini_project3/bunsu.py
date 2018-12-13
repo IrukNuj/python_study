@@ -72,4 +72,4 @@ def decision_posi_nega(added_fraction):
     return added_fraction, plus_minus_sign
 
 def gcd(num1, num2):
-    return  math.gcd(num1, num2)
+    return math.gcd(num1, num2)
