@@ -16,14 +16,14 @@ class Number(Expression):
         return self.number
     
     def diff(self):
-        return str(self.number)
+        return Number(0)
 
 class X(Expression):
     def eval(self, x_value):
         return x_value
 
     def diff(self):
-        return "x"
+        return Number(1)
 
 
 class Add(Expression):
@@ -35,7 +35,7 @@ class Add(Expression):
         return self.number1.eval(x_value) + self.number2.eval(x_value)
 
     def diff(self):
-        return '{0}+{1}'.format(self.number1.diff, self.number2.diff)
+        return Add(self.number1.diff(), self.number2.diff())
 
 
 class Sub(Expression):
@@ -47,7 +47,8 @@ class Sub(Expression):
         return self.number1.eval(x_value) - self.number2.eval(x_value)
 
     def diff(self):
-        return '{0}+{1}'.format(self.number1.diff, self.number2.diff)
+        return Sub(self.number1.diff(), self.number2.diff())
+
 
 class Mul(Expression):
     def __init__(self, number1, number2):
@@ -58,7 +59,11 @@ class Mul(Expression):
         return self.number1.eval(x_value) * self.number2.eval(x_value)
 
     def diff(self):
-        return '{0}+{1}'.format(self.number1.diff, self.number2.diff)
+        if self.number1 == self.number2:
+            return Mul(Number(2), X())
+        else:
+            return Mul(self.number1, self.number2.diff())
+
 
 class Div(Expression):
     def __init__(self, number1, number2):
@@ -69,4 +74,4 @@ class Div(Expression):
         return self.number1.eval(x_value) / self.number2.eval(x_value)
 
     def diff(self):
-        return '{0}+{1}'.format(self.number1.diff, self.number2.diff)
+        return Div(Sub(Mul(self.number1.diff(), self.number2), Mul(self.number1, self.number2.diff())),Mul(self.number2, self.number2))
